@@ -24,6 +24,7 @@ const MainContainer = () => {
         const rates = await responseRates.json();
         // console.log('Exchange Rates Structure:', rates);
 
+  
         setData(benchmarks.product_benchmarks);
         setExchangeRates(rates.exchange_rates);
 
@@ -46,15 +47,19 @@ const MainContainer = () => {
   function convertToEuros(amount, currencyId, toCurrencyId, exchangeRates, year) {
     for (let i = 0; i < exchangeRates.length; i++) {
       let rate = exchangeRates[i];
+      console.log('Checking Rate:', rate);
+
       
       if (rate.from_currency_id === currencyId) {
         if (rate.to_currency_id === toCurrencyId) {
           if (rate.year === year) {
+            // console.log(`Found Exchange Rate: ${rate.exchange_rate} for Year: ${year}`);
             return amount * rate.exchange_rate;
           }
         }
       }
     }
+    console.log(`Converted Amount: ${amount}`);
     return amount;
   }
 
@@ -78,14 +83,14 @@ function calculateDifferenceAndStatus(details) {
 }
 
 //  function to calculate totals
-function calculateTotals(data, exchangeRates) {
+function calculateTotals(data, exchangeRates, euroCurrencyId) {
   const totals = {};
 
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
     const year = new Date(item.end_date).getFullYear();
-    const paymentInEuros = convertToEuros(item.payment, item.currency.id, 3, exchangeRates, year);
-    const benchmarkInEuros = convertToEuros(item.benchmark, item.currency.id, 3, exchangeRates, year);
+    const paymentInEuros = convertToEuros(item.payment, item.currency.id, euroCurrencyId, exchangeRates, year);
+    const benchmarkInEuros = convertToEuros(item.benchmark, item.currency.id, euroCurrencyId, exchangeRates, year);
 
     initializeProvider(totals, item.provider_name);
 
@@ -102,15 +107,16 @@ function calculateTotals(data, exchangeRates) {
   return totals;
 }
 
+
   // function to calculate trend data for each product
-  function calculateTrendData(data, exchangeRates) {
+  function calculateTrendData(data, exchangeRates, euroCurrencyId) {
     const trendData = {}; 
 
 
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       const year = new Date(item.end_date).getFullYear(); 
-      const paymentInEuros = convertToEuros(item.payment, item.currency.id, 3, exchangeRates, year); 
+      const paymentInEuros = convertToEuros(item.payment, item.currency.id, euroCurrencyId, exchangeRates, year); 
 
       if (!(item.product_name in trendData)) {
         trendData[item.product_name] = {};
@@ -149,16 +155,19 @@ function calculateTotals(data, exchangeRates) {
       </nav>
 
       <main>
-        <TableComponent
-          data={data}
-          exchangeRates={exchangeRates}
-          convertToEuros={convertToEuros}
-          totals={totals}
-        />
-
-        <ChartComponent trendData={trendData} />
-
-         
+        {loading ? ( 
+          <div>Loading...</div>
+        ) : (
+          <>
+            <TableComponent
+              data={data}
+              exchangeRates={exchangeRates}
+              convertToEuros={convertToEuros}
+              totals={totals}
+            />
+            <ChartComponent trendData={trendData} />
+          </>
+        )}
       </main>
     </>
   );

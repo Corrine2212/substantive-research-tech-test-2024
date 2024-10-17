@@ -17,6 +17,7 @@ We have created a mock API to retrieve this data for one client and another API 
 - Look for a better table option instead of html for better responsiveness.
 - The figures in the table could be formatted a little clearer so that it reads x,xxx,xxx.xx
 - Might be nice to have a table with the provider and a breakdown of all the products with their payments and benchmark figures.
+- Have a better loading screen when waiting for data to be retrieved.
   
 
 ### Tech stack used:
