@@ -1,0 +1,131 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic);
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--neutral-clr-200);
+}
+
+main {
+  padding: 40px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 0;
+}
+
+p {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+
+:root {
+  --neutral-clr-200: hsl(213deg 100% 99%);
+  --neutral-clr-300: hsl(0, 0%, 92%);
+  --accent-clr-dark-blue-700: hsl(210deg 59% 16%);
+  --accent-clr-blue-600: hsl(199deg 58% 20%);
+  --accent-clr-cyan: hsl(180deg 50% 60%);
+  --accent-clr-orange: hsl(31deg 92% 56%);
+  --text-clr: hsl(211deg 69% 22%);
+}
+
+
+nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--accent-clr-dark-blue-700);
+  height: 2.5rem;
+  width: 100vw;
+  padding: 3.125rem;
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0px 12px 13px -2px #d6d6d6;
+}
+
+nav h2 {
+  color: #fff;
+  margin: 0;
+}
+
+table {
+  border-radius: 15px;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 2px solid var(--neutral-clr-300);
+}
+table td + td {
+  border-left: 2px solid var(--neutral-clr-300);
+}
+table th {
+  background-color: var(--accent-clr-blue-600);
+  color: #fff;
+  padding: 1.25rem;
+}
+table td {
+  padding: 0.9375rem;
+}
+table tr:nth-child(even) {
+  background-color: hsl(0, 0%, 93%);
+}
+table td:nth-child(2), table td:nth-child(3) {
+  text-align: center;
+}
+
+
+.chart-section {
+  margin-top: 30px;
+}
